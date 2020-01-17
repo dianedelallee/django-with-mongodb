@@ -15,19 +15,16 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'svmv+s(fwlwzxq7d7kmiu_m9^hvu$^wi5q34zh5_s2=khsqpcv'
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
 
 # Application definition
 
@@ -71,21 +68,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hello_django.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("NOSQL_ENGINE", "djongo"),
-        "NAME": os.environ.get("NOSQL_DATABASE", os.path.join(BASE_DIR, "myapp-djongo-db")),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
-    },
+    'default': {
+        'ENGINE': os.environ.get("NOSQL_ENGINE", "djongo"),
+        'NAME': os.environ.get("NOSQL_NAME", "test"),
+        'HOST': os.environ.get("NOSQL_HOST", "mongodb"),
+        'ENFORCE_SCHEMA': os.environ.get("NOSQL_ENFORCE_SCHEMA", True)
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -105,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -118,7 +110,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

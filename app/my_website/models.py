@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class Article(models.Model):
+    title = models.TextField()
+    Author = models.TextField(default=None, blank=True)

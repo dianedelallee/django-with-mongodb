@@ -11,15 +11,13 @@ services:
     env_file:
       - ./.env.dev
     depends_on:
-    - db
-  db:
-    image: postgres:12.0-alpine
+    - mongodb
+  mongodb:
+    image: mongo
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - ./data-db:/data/db
+    ports:
+      - 27017:27017
 
 volumes:
   postgres_data:
